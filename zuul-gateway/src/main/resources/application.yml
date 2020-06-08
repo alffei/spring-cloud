@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://chenpf:chenpf1234@localhost:8761/eureka/
+
+
+zuul:
+#  prefix: "/mart/"  ## 统一前缀
+  # 路由规则
+  routes:
+    user-service:
+      path: /user-api/**
+
+logging:
+  config: classpath:logback.xml
+
