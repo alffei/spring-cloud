@@ -6,10 +6,7 @@ import com.gd.common.exception.CommonServiceException;
 import com.gd.common.utils.JwtTokenUtil;
 import com.gd.common.vo.BaseResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     public BaseResponseVO login(@RequestBody LoginParam param) throws CommonServiceException {
 
         // 数据验证
@@ -51,6 +48,11 @@ public class UserController {
         result.put("token",token);
 
         return BaseResponseVO.success(result);
+    }
+
+    @GetMapping("/info/{name}")
+    public BaseResponseVO info(@PathVariable("name") String name ) {
+        return BaseResponseVO.success(userService.getUserInfo(name));
     }
 
 }

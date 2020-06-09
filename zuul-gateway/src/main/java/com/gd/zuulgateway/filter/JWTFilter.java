@@ -6,15 +6,17 @@ import com.gd.common.utils.JwtTokenUtil;
 import com.gd.common.vo.BaseResponseVO;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 import io.jsonwebtoken.JwtException;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  * @description :
  **/
+@Slf4j
 public class JWTFilter extends ZuulFilter {
     /**
     * @Description: Filter类型
@@ -27,7 +29,7 @@ public class JWTFilter extends ZuulFilter {
     }
 
     /**
-    * @Description: filter的执行顺序
+    * @Description: filter的执行顺序,数字越大,顺序越后
     * @Param: []
     * @return: int
     */
@@ -61,6 +63,13 @@ public class JWTFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         // 获取当前请求和返回值
         HttpServletRequest request = ctx.getRequest();
+        // 测试 遍历Header
+        Enumeration<String> headerNames = request.getHeaderNames();
+        if (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            log.info("Request Header: {}, Value: {}", headerName, request.getHeader(headerName));
+        }
+
         HttpServletResponse response = ctx.getResponse();
 
         // 提前设置请求继续，如果失败则修改此内容
@@ -76,7 +85,7 @@ public class JWTFilter extends ZuulFilter {
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
         String authToken = null;
         // Bearer header.payload.sign
-        if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
+        if (requestHeader != null && requestHeader.startsWith("XYMart ")) {
             authToken = requestHeader.substring(7);
 
             //验证token是否过期,包含了验证jwt是否正确

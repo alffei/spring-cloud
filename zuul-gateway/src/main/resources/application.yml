@@ -8,11 +8,13 @@ eureka:
 
 
 zuul:
-#  prefix: "/mart/"  ## 统一前缀
+#  prefix: "/mart/"
   # 路由规则
   routes:
     user-service:
       path: /user-api/**
+    product-service:
+      path: /product-api/**
 
 logging:
   config: classpath:logback.xml

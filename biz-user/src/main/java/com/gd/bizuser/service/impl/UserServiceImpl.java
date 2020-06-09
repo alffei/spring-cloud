@@ -45,4 +45,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User getUserInfo(String name) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_name",name);
+        return userMapper.selectOne(queryWrapper);
+    }
+
 }
