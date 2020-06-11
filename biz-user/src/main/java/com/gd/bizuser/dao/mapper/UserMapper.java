@@ -10,5 +10,4 @@ import com.gd.bizuser.dao.entity.User;
  *
  */
 public interface UserMapper extends BaseMapper<User> {
-
 }

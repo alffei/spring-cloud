@@ -18,11 +18,13 @@
     <modules>
         <!-- 通用模块 -->
         <module>common</module>
+
         <module>eureka-server</module>
         <module>zuul-gateway</module>
 
         <!-- 业务模块 -->
         <module>biz-user</module>
+        <module>biz-product</module>
     </modules>
 
     <properties>

@@ -69,7 +69,6 @@ public class JWTFilter extends ZuulFilter {
             String headerName = headerNames.nextElement();
             log.info("Request Header: {}, Value: {}", headerName, request.getHeader(headerName));
         }
-
         HttpServletResponse response = ctx.getResponse();
 
         // 提前设置请求继续，如果失败则修改此内容
@@ -100,6 +99,7 @@ public class JWTFilter extends ZuulFilter {
                     // 3、是否需要验签,以及验签的算法
 
                     // 4、判断userid是否有效
+
                 }
             } catch (JwtException e) {
                 //有异常就是token解析失败

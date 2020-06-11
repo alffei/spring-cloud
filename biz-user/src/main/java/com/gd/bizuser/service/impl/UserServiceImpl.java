@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @description : 用户模块业务实现
  **/
-@Service
+@Service()
 public class UserServiceImpl implements UserService {
 
     @Resource
